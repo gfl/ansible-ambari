@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "puppetlabs/centos-6.5-64-nocm"
+  config.vm.box = "hansode/centos-6.5-x86_64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -54,9 +54,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # VMs are up and running.
     slave2.vm.provision "ansible" do |ansible|
       ansible.inventory_path = "inventory/vagrant-virtualbox"
-      ansible.verbose = "v"
+      ansible.verbose = "vvv"
 #      ansible.raw_arguments = "--check"
-      ansible.raw_arguments = "--private-key=~/.vagrant.d/insecure_private_key"
+#      ansible.raw_arguments = "--private-key=~/.vagrant.d/insecure_private_key"
       ansible.sudo = true
       ansible.playbook = "site.yml"
       ansible.extra_vars = { ansible_ssh_user: 'vagrant' }
