@@ -24,6 +24,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # behaviour).
   config.ssh.insert_key = false 
 
+  # Create a forwarded port mapping which allows access to specific port 
+  # within the machine from a port on the host machine. 
+
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--cpus", "1", "--memory", "1024"]
   end
@@ -31,6 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "ambari" do |ambari|
     ambari.vm.network "private_network", ip: "192.168.50.3"
     ambari.vm.hostname = "ambari.localdomain"
+    ambari.vm.network "forwarded_port", guest: 8080, host: 1234
   end
 
   config.vm.define "master1" do |master1|
