@@ -19,6 +19,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # config.vm.synced_folder "../data", "/vagrant_data"
 
+  # As of Vagrant 1.7+, the ansible parallel provisioning trick is easier to
+  # be implemented with `config.ssh.insert_key=false` (fallback to previous
+  # behaviour).
+  config.ssh.insert_key = false 
+
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--cpus", "1", "--memory", "1024"]
   end
@@ -56,7 +61,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.inventory_path = "inventory/vagrant-virtualbox"
       ansible.verbose = "vvv"
 #      ansible.raw_arguments = "--check"
-#      ansible.raw_arguments = "--private-key=~/.vagrant.d/insecure_private_key"
+      ansible.raw_arguments = "--private-key=~/.vagrant.d/insecure_private_key"
       ansible.sudo = true
       ansible.playbook = "site.yml"
       ansible.extra_vars = { ansible_ssh_user: 'vagrant' }
