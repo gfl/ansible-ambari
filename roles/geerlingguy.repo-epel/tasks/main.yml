@@ -1,4 +1,7 @@
 ---
+# Added to be able to update yum on centos 6.5
+- shell: echo "6" > /etc/yum/vars/releasever
+
 - name: Install EPEL repo.
   yum:
     name: "{{ epel_repo_url }}"
