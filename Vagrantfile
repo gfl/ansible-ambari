@@ -28,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # within the machine from a port on the host machine. 
 
   config.vm.provider "virtualbox" do |v|
-    v.customize ["modifyvm", :id, "--cpus", "1", "--memory", "1024"]
+    v.customize ["modifyvm", :id, "--cpus", "1", "--memory", "8192"]
   end
 
   config.vm.define "ambari" do |ambari|
